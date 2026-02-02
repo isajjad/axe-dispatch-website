@@ -1,48 +1,29 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { getPosts, urlFor, Post } from "@/lib/sanity";
 
-const dummyPosts = [
-    {
-        id: 1,
-        title: "Market Trends: Predicting Freight Rates for 2026",
-        excerpt: "What leading analytical data tells us about the upcoming seasonal shifts in the trucking industry.",
-        category: "Market Insights",
-        author: "Alex Johnson",
-        date: "Feb 01, 2026",
-        image: "https://images.unsplash.com/photo-1519003722824-192d9978736b?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-        id: 2,
-        title: "5 Tips to Improve Your Fuel Efficiency This Winter",
-        excerpt: "Practical advice for owner-operators to maintain their equipment and reduce fuel costs during extreme weather.",
-        category: "Driver Tips",
-        author: "Sara Mills",
-        date: "Jan 28, 2026",
-        image: "https://images.unsplash.com/photo-1590674899484-13da0d1b58f5?auto=format&fit=crop&q=80&w=800"
-    },
-    {
-        id: 3,
-        title: "Navigating Broker Credit: A Carrier's Guide",
-        excerpt: "How to read credit reports and identify 'red flags' before accepting a load from a new broker.",
-        category: "Safety",
-        author: "Marcus Reed",
-        date: "Jan 15, 2026",
-        image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800"
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function BlogPage() {
+    let posts: Post[] = [];
+    let error = false;
+
+    try {
+        posts = await getPosts();
+    } catch {
+        error = true;
     }
-];
 
-const BlogPage = () => {
+    const hasPosts = posts && posts.length > 0;
+
     return (
         <div className="pt-24 min-h-screen">
             {/* Search Header */}
             <section className="bg-secondary text-white py-20">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-5xl font-bold mb-8">The Carrier's Edge Blog</h1>
+                        <h1 className="text-5xl font-bold mb-8">The Carrier&apos;s Edge Blog</h1>
                         <p className="text-xl text-gray-400 mb-12">Expert insights, market analysis, and tips for professional carriers.</p>
 
                         <div className="relative max-w-2xl mx-auto">
@@ -57,66 +38,104 @@ const BlogPage = () => {
                 </div>
             </section>
 
-            {/* Featured Posts */}
+            {/* Posts Section */}
             <section className="py-24">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                        {dummyPosts.map((post, idx) => (
-                            <motion.article
-                                key={post.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                                viewport={{ once: true }}
-                                className="group cursor-pointer"
-                            >
-                                <div className="relative h-64 rounded-3xl overflow-hidden mb-6">
-                                    <Image
-                                        src={post.image}
-                                        alt={post.title}
-                                        fill
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
-                                    <div className="absolute top-4 left-4">
-                                        <span className="bg-primary text-white text-xs font-bold uppercase py-2 px-4 rounded-full">
-                                            {post.category}
-                                        </span>
-                                    </div>
+                    {error ? (
+                        <div className="text-center py-20">
+                            <div className="max-w-md mx-auto">
+                                <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <span className="text-4xl">⚠️</span>
                                 </div>
-
-                                <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                                    <div className="flex items-center gap-1">
-                                        <Calendar size={14} />
-                                        {post.date}
-                                    </div>
-                                    <div className="flex items-center gap-1">
-                                        <User size={14} />
-                                        {post.author}
-                                    </div>
+                                <h2 className="text-2xl font-bold mb-4">Connection Error</h2>
+                                <p className="text-gray-500">Unable to load blog posts. Please check your Sanity configuration.</p>
+                            </div>
+                        </div>
+                    ) : !hasPosts ? (
+                        <div className="text-center py-20">
+                            <div className="max-w-md mx-auto">
+                                <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <span className="text-4xl">📝</span>
                                 </div>
-
-                                <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight">
-                                    {post.title}
-                                </h3>
-                                <p className="text-gray-500 mb-6 line-clamp-2 italic">
-                                    {post.excerpt}
-                                </p>
-
+                                <h2 className="text-2xl font-bold mb-4">No Articles Yet</h2>
+                                <p className="text-gray-500 mb-6">We&apos;re working on creating valuable content for you. Check back soon!</p>
                                 <Link
-                                    href={`/blog/${post.id}`}
-                                    className="inline-flex items-center gap-2 font-bold text-secondary group-hover:gap-4 transition-all"
+                                    href="/contact"
+                                    className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-all"
                                 >
-                                    Read Full Article <ArrowRight size={18} className="text-primary" />
+                                    Contact Us <ArrowRight size={18} />
                                 </Link>
-                            </motion.article>
-                        ))}
-                    </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                                {posts.map((post, idx) => (
+                                    <article
+                                        key={post._id}
+                                        className="group cursor-pointer"
+                                        style={{
+                                            animation: `fadeSlideDown 0.5s ease-out ${idx * 0.1}s both`
+                                        }}
+                                    >
+                                        <Link href={`/blog/${post.slug.current}`}>
+                                            <div className="relative h-64 rounded-3xl overflow-hidden mb-6">
+                                                {post.mainImage ? (
+                                                    <Image
+                                                        src={urlFor(post.mainImage).width(800).height(600).url()}
+                                                        alt={post.title}
+                                                        fill
+                                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+                                                        <span className="text-6xl">📄</span>
+                                                    </div>
+                                                )}
+                                                {post.categories && post.categories[0] && (
+                                                    <div className="absolute top-4 left-4">
+                                                        <span className="bg-primary text-white text-xs font-bold uppercase py-2 px-4 rounded-full">
+                                                            {post.categories[0].title}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </div>
 
-                    <div className="mt-20 text-center">
-                        <button className="bg-gray-100 hover:bg-gray-200 dark:bg-secondary dark:hover:bg-gray-800 py-4 px-10 rounded-2xl font-bold transition-all">
-                            Load More Articles
-                        </button>
-                    </div>
+                                            <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                                                <div className="flex items-center gap-1">
+                                                    <Calendar size={14} />
+                                                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                                                        month: 'short',
+                                                        day: 'numeric',
+                                                        year: 'numeric'
+                                                    })}
+                                                </div>
+                                                {post.author && (
+                                                    <div className="flex items-center gap-1">
+                                                        <User size={14} />
+                                                        {post.author.name}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight">
+                                                {post.title}
+                                            </h3>
+                                            {post.excerpt && (
+                                                <p className="text-gray-500 mb-6 line-clamp-2 italic">
+                                                    {post.excerpt}
+                                                </p>
+                                            )}
+
+                                            <span className="inline-flex items-center gap-2 font-bold text-secondary group-hover:gap-4 transition-all">
+                                                Read Full Article <ArrowRight size={18} className="text-primary" />
+                                            </span>
+                                        </Link>
+                                    </article>
+                                ))}
+                            </div>
+                        </>
+                    )}
                 </div>
             </section>
 
@@ -148,6 +167,4 @@ const BlogPage = () => {
             </section>
         </div>
     );
-};
-
-export default BlogPage;
+}
