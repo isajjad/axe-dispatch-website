@@ -11,8 +11,8 @@ export type SanityImageSource = {
 } | any;
 
 export const client = createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "dummy-id", // Fallback to prevent crash
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+    projectId: "2gwgfkkp",
+    dataset: "production",
     apiVersion: "2024-01-01",
     useCdn: true,
 });
