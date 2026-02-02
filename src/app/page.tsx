@@ -115,8 +115,8 @@ export default function Home() {
             <div className="lg:w-1/2 relative">
               <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
                 <Image
-                  src="https://images.unsplash.com/photo-1519003722824-192d9978736b?auto=format&fit=crop&q=80&w=800"
-                  alt="Truck on road"
+                  src="/truck-experience.jpg"
+                  alt="Professional AXE Dispatch Truck"
                   width={800}
                   height={600}
                   className="w-full aspect-video object-cover"
