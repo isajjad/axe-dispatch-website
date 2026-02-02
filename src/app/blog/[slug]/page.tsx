@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: Props) {
     const readingTime = Math.ceil(JSON.stringify(post.body || []).split(' ').length / 200);
 
     return (
-        <div className="pt-24 min-h-screen">
+        <div className="pt-24 min-h-screen bg-secondary text-white">
             {/* Hero Section */}
             <section className="relative h-[60vh] min-h-[500px] flex items-end">
                 <div className="absolute inset-0">
@@ -135,12 +135,12 @@ export default async function BlogPostPage({ params }: Props) {
                         </div>
 
                         {/* CTA */}
-                        <div className="mt-16 p-8 bg-secondary rounded-3xl text-white text-center">
-                            <h3 className="text-2xl font-bold mb-4">Ready to Scale Your Trucking Business?</h3>
-                            <p className="text-white/80 mb-6">Let AXE Dispatch handle your loads while you focus on driving.</p>
+                        <div className="mt-20 p-10 bg-white/5 border border-white/10 rounded-[2.5rem] text-center">
+                            <h3 className="text-3xl font-bold mb-4 text-white">Ready to Scale Your Trucking Business?</h3>
+                            <p className="text-white/70 mb-8 text-lg">Let AXE Dispatch handle your loads while you focus on driving.</p>
                             <Link
                                 href="/contact"
-                                className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold hover:bg-red-700 transition-all"
+                                className="inline-flex items-center gap-2 bg-primary text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-red-700 transition-all shadow-xl shadow-primary/20"
                             >
                                 Get Started Today
                             </Link>
