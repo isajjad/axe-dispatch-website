@@ -90,7 +90,7 @@ const Footer = () => {
                             <li className="flex items-start gap-3">
                                 <MapPin className="text-primary shrink-0" size={20} />
                                 <span className="text-gray-400">
-                                    Wyoming, USA
+                                    30 N Gould St Ste R Sheridan, WY 82801, USA
                                 </span>
                             </li>
                         </ul>

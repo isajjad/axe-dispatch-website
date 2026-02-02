@@ -77,7 +77,7 @@ const ContactPage = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">Business Office</p>
-                                        <p className="text-2xl font-bold italic">Wyoming, USA</p>
+                                        <p className="text-2xl font-bold italic">30 N Gould St Ste R Sheridan, WY 82801, USA</p>
                                     </div>
                                 </div>
                             </div>
@@ -183,17 +183,34 @@ const ContactPage = () => {
                 </div>
             </section>
 
-            {/* Map Placeholder */}
-            <section className="h-[500px] grayscale hover:grayscale-0 transition-all duration-1000 relative">
-                <div className="absolute inset-0 bg-gray-300 flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center">
-                    <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm border-t-8 border-primary">
-                        <MapPin className="text-primary w-12 h-12 mx-auto mb-4" />
-                        <h4 className="text-2xl font-bold mb-2 text-secondary">Axe Dispatch LLC</h4>
-                        <p className="text-gray-500 mb-4 font-medium italic">Operating Nationwide from Wyoming</p>
-                        <Link href="#" className="text-primary font-bold flex items-center justify-center gap-2">
-                            Open in Google Maps <ExternalLink size={16} />
-                        </Link>
-                    </div>
+            {/* Google Map */}
+            <section className="h-[500px] w-full relative">
+                <iframe
+                    title="Google Map Location of Axe Dispatch LLC"
+                    width="100%"
+                    height="100%"
+                    id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=30%20N%20Gould%20St%20Ste%20R%20Sheridan%2C%20WY%2082801%2C%20USA&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight={0}
+                    marginWidth={0}
+                    className="grayscale hover:grayscale-0 transition-all duration-1000"
+                ></iframe>
+
+                {/* Overlay Card */}
+                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-8 bg-white p-6 rounded-2xl shadow-2xl max-w-xs border-l-4 border-primary">
+                    <MapPin className="text-primary w-8 h-8 mb-2" />
+                    <h4 className="text-xl font-bold text-secondary">Axe Dispatch LLC</h4>
+                    <p className="text-gray-500 text-sm mb-3">30 N Gould St Ste R<br />Sheridan, WY 82801</p>
+                    <a
+                        href="https://maps.google.com/maps?q=30%20N%20Gould%20St%20Ste%20R%20Sheridan%2C%20WY%2082801%2C%20USA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary font-bold text-sm flex items-center gap-2 hover:underline"
+                    >
+                        Get Directions <ExternalLink size={14} />
+                    </a>
                 </div>
             </section>
         </div>
