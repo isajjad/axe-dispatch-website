@@ -23,13 +23,13 @@ const ptComponents = {
         },
     },
     block: {
-        h2: ({ children }: any) => <h2 className="text-4xl font-bold mt-16 mb-8 text-white">{children}</h2>,
-        h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-10 mb-5 text-white">{children}</h3>,
-        normal: ({ children }: any) => <p className="text-white leading-relaxed mb-8 text-xl font-medium">{children}</p>,
+        h2: ({ children }: any) => <h2 className="text-4xl font-bold mt-16 mb-8 text-secondary border-b border-gray-100 pb-4">{children}</h2>,
+        h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-10 mb-5 text-secondary">{children}</h3>,
+        normal: ({ children }: any) => <p className="text-gray-800 leading-relaxed mb-8 text-xl font-normal">{children}</p>,
     },
     list: {
-        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-8 text-white space-y-3 text-lg font-medium">{children}</ul>,
-        number: ({ children }: any) => <ol className="list-decimal list-inside mb-8 text-white space-y-3 text-lg font-medium">{children}</ol>,
+        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-8 text-gray-800 space-y-3 text-lg font-normal">{children}</ul>,
+        number: ({ children }: any) => <ol className="list-decimal list-inside mb-8 text-gray-800 space-y-3 text-lg font-normal">{children}</ol>,
     },
 };
 
@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: Props) {
     const readingTime = Math.ceil(JSON.stringify(post.body || []).split(' ').length / 200);
 
     return (
-        <div className="pt-24 min-h-screen bg-secondary text-white">
+        <div className="pt-24 min-h-screen">
             {/* Hero Section */}
             <section className="relative h-[60vh] min-h-[500px] flex items-end">
                 <div className="absolute inset-0">
