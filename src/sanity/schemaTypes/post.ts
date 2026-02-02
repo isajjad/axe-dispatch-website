@@ -65,12 +65,7 @@ export default defineType({
             name: 'author',
             title: 'Author',
             type: 'reference',
-            to: { type: 'author' }, // Assumes 'author' schema exists, else I should create it or make it just a string for now? 
-            // User likely has author from previous simple setup. I will check schema/index.ts or just assume.
-            // Better to stick to simple string if author schema not guaranteed, BUT standard usually has author.
-            // I'll assume standard author schema needs to be there or I'll add author schema too.
-            // Reverting to basic schema for author if not present might break.
-            // Let's create an author schema too to be safe.
+            to: [{ type: 'author' }], // References the author schema
             group: 'main',
         }),
         defineField({
@@ -94,7 +89,7 @@ export default defineType({
             name: 'categories',
             title: 'Categories',
             type: 'array',
-            of: [{ type: 'reference', to: { type: 'category' } }],
+            of: [{ type: 'reference', to: [{ type: 'category' }] }],
             group: 'main',
         }),
         defineField({
