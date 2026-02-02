@@ -12,18 +12,24 @@ import {
     ExternalLink
 } from "lucide-react";
 import { useState } from "react";
+import { sendContactEmail } from "../actions";
 
 const ContactPage = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setIsSubmitting(true);
-        // Placeholder for Resend integration
-        setTimeout(() => {
-            alert("Thank you! Your message has been sent. (Simulation)");
-            setIsSubmitting(false);
-        }, 1500);
+        setStatus("loading");
+
+        const formData = new FormData(e.currentTarget);
+        const result = await sendContactEmail(formData);
+
+        if (result.success) {
+            setStatus("success");
+            (e.target as HTMLFormElement).reset();
+        } else {
+            setStatus("error");
+        }
     };
 
     return (
@@ -107,6 +113,7 @@ const ContactPage = () => {
                                             <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="full-name">Full Name</label>
                                             <input
                                                 required
+                                                name="name"
                                                 id="full-name"
                                                 type="text"
                                                 placeholder="John Doe"
@@ -117,6 +124,7 @@ const ContactPage = () => {
                                             <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="phone-number">Phone Number</label>
                                             <input
                                                 required
+                                                name="phone"
                                                 id="phone-number"
                                                 type="tel"
                                                 placeholder="+1 (000) 000-0000"
@@ -130,6 +138,7 @@ const ContactPage = () => {
                                             <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="email">Email Address</label>
                                             <input
                                                 required
+                                                name="email"
                                                 id="email"
                                                 type="email"
                                                 placeholder="john@example.com"
@@ -139,6 +148,7 @@ const ContactPage = () => {
                                         <div className="space-y-2">
                                             <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="truck-type">Truck Type</label>
                                             <select
+                                                name="truckType"
                                                 id="truck-type"
                                                 title="Select your truck type"
                                                 className="w-full bg-gray-50 dark:bg-gray-800 border-none rounded-2xl py-5 px-8 focus:ring-2 focus:ring-primary outline-none appearance-none transition-all italic"
@@ -157,6 +167,7 @@ const ContactPage = () => {
                                         <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="message">Message</label>
                                         <textarea
                                             required
+                                            name="message"
                                             id="message"
                                             placeholder="Tell us about your fleet..."
                                             rows={5}
@@ -165,17 +176,23 @@ const ContactPage = () => {
                                     </div>
 
                                     <button
-                                        disabled={isSubmitting}
-                                        className="w-full bg-primary hover:bg-red-700 text-white font-bold py-6 rounded-3xl text-xl flex items-center justify-center gap-4 transition-all transform active:scale-[0.98] disabled:opacity-70"
+                                        disabled={status === "loading" || status === "success"}
+                                        className={`w-full font-bold py-6 rounded-3xl text-xl flex items-center justify-center gap-4 transition-all transform active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed
+                                            ${status === "success" ? "bg-green-600 text-white hover:bg-green-700" : "bg-primary hover:bg-red-700 text-white"}
+                                        `}
                                     >
-                                        {isSubmitting ? (
+                                        {status === "loading" ? (
                                             <div className="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin" />
+                                        ) : status === "success" ? (
+                                            <>Message Sent! <Send size={24} /></>
                                         ) : (
-                                            <>
-                                                Send Message <Send size={24} />
-                                            </>
+                                            <>Send Message <Send size={24} /></>
                                         )}
                                     </button>
+
+                                    {status === "error" && (
+                                        <p className="text-red-500 text-center font-bold">Failed to send message. Please try again.</p>
+                                    )}
                                 </form>
                             </div>
                         </div>
