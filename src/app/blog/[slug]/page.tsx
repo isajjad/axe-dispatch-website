@@ -23,13 +23,13 @@ const ptComponents = {
         },
     },
     block: {
-        h2: ({ children }: any) => <h2 className="text-4xl font-bold mt-16 mb-8 text-white border-b border-white/10 pb-4">{children}</h2>,
+        h2: ({ children }: any) => <h2 className="text-4xl font-bold mt-16 mb-8 text-white">{children}</h2>,
         h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-10 mb-5 text-white">{children}</h3>,
-        normal: ({ children }: any) => <p className="text-gray-200 leading-relaxed mb-8 text-xl">{children}</p>,
+        normal: ({ children }: any) => <p className="text-white leading-relaxed mb-8 text-xl font-medium">{children}</p>,
     },
     list: {
-        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-8 text-gray-200 space-y-3 text-lg">{children}</ul>,
-        number: ({ children }: any) => <ol className="list-decimal list-inside mb-8 text-gray-200 space-y-3 text-lg">{children}</ol>,
+        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-8 text-white space-y-3 text-lg font-medium">{children}</ul>,
+        number: ({ children }: any) => <ol className="list-decimal list-inside mb-8 text-white space-y-3 text-lg font-medium">{children}</ol>,
     },
 };
 
