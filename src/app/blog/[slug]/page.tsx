@@ -23,13 +23,13 @@ const ptComponents = {
         },
     },
     block: {
-        h2: ({ children }: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-white">{children}</h2>,
-        h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-8 mb-4 text-white">{children}</h3>,
-        normal: ({ children }: any) => <p className="text-gray-400 leading-relaxed mb-6 text-lg">{children}</p>,
+        h2: ({ children }: any) => <h2 className="text-4xl font-bold mt-16 mb-8 text-white border-b border-white/10 pb-4">{children}</h2>,
+        h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-10 mb-5 text-white">{children}</h3>,
+        normal: ({ children }: any) => <p className="text-gray-200 leading-relaxed mb-8 text-xl">{children}</p>,
     },
     list: {
-        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-6 text-gray-400 space-y-2">{children}</ul>,
-        number: ({ children }: any) => <ol className="list-decimal list-inside mb-6 text-gray-400 space-y-2">{children}</ol>,
+        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-8 text-gray-200 space-y-3 text-lg">{children}</ul>,
+        number: ({ children }: any) => <ol className="list-decimal list-inside mb-8 text-gray-200 space-y-3 text-lg">{children}</ol>,
     },
 };
 
@@ -123,9 +123,9 @@ export default async function BlogPostPage({ params }: Props) {
             </section>
 
             {/* Content Section */}
-            <section className="py-16">
+            <section className="py-20">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-3xl mx-auto">
+                    <div className="max-w-5xl mx-auto">
                         <div className="prose prose-lg dark:prose-invert max-w-none">
                             {post.body ? (
                                 <PortableText value={post.body} components={ptComponents} />
