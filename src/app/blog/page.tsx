@@ -11,7 +11,8 @@ export default async function BlogPage() {
 
     try {
         posts = await getPosts();
-    } catch {
+    } catch (e) {
+        console.error("Sanity Fetch Error:", e);
         error = true;
     }
 
