@@ -36,7 +36,7 @@ export interface Post {
     };
     categories: { title: string }[];
     publishedAt: string;
-    body?: unknown[];
+    body?: any[];
 }
 
 // Queries

@@ -3,6 +3,35 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, User, ArrowLeft, Clock } from "lucide-react";
+import { PortableText } from "@portabletext/react";
+
+// Components for PortableText to render images and other types
+const ptComponents = {
+    types: {
+        image: ({ value }: any) => {
+            if (!value?.asset?._ref) return null;
+            return (
+                <div className="relative w-full h-[450px] my-12 rounded-3xl overflow-hidden shadow-2xl">
+                    <Image
+                        src={urlFor(value).width(1200).height(800).url()}
+                        alt={value.alt || 'Blog Image'}
+                        fill
+                        className="object-cover"
+                    />
+                </div>
+            );
+        },
+    },
+    block: {
+        h2: ({ children }: any) => <h2 className="text-3xl font-bold mt-12 mb-6 text-white">{children}</h2>,
+        h3: ({ children }: any) => <h3 className="text-2xl font-bold mt-8 mb-4 text-white">{children}</h3>,
+        normal: ({ children }: any) => <p className="text-gray-400 leading-relaxed mb-6 text-lg">{children}</p>,
+    },
+    list: {
+        bullet: ({ children }: any) => <ul className="list-disc list-inside mb-6 text-gray-400 space-y-2">{children}</ul>,
+        number: ({ children }: any) => <ol className="list-decimal list-inside mb-6 text-gray-400 space-y-2">{children}</ol>,
+    },
+};
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -97,16 +126,12 @@ export default async function BlogPostPage({ params }: Props) {
             <section className="py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-3xl mx-auto">
-                        {post.excerpt && (
-                            <p className="text-xl text-gray-600 dark:text-gray-400 italic border-l-4 border-primary pl-6 mb-12">
-                                {post.excerpt}
-                            </p>
-                        )}
-
                         <div className="prose prose-lg dark:prose-invert max-w-none">
-                            <p className="text-gray-500">
-                                Full article content will be rendered here once Sanity is configured with PortableText.
-                            </p>
+                            {post.body ? (
+                                <PortableText value={post.body} components={ptComponents} />
+                            ) : (
+                                <p className="text-gray-500 italic">No content found for this article.</p>
+                            )}
                         </div>
 
                         {/* CTA */}
