@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { sendContactEmail } from "../actions";
+import PageHeader from "@/components/PageHeader";
 
 const ContactPage = () => {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -33,20 +34,11 @@ const ContactPage = () => {
     };
 
     return (
-        <div className="pt-24 min-h-screen">
-            <section className="py-20 bg-secondary text-white overflow-hidden">
-                <div className="container mx-auto px-4 relative">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="max-w-4xl mx-auto text-center"
-                    >
-                        <h1 className="text-5xl md:text-7xl font-extrabold mb-8">Let's Get You <span className="text-primary">Rolling.</span></h1>
-                        <p className="text-xl text-gray-400 mb-10 italic">Ready to see the difference AXE Dispatch can make for your bottom line?</p>
-                    </motion.div>
-                    <div className="absolute top-0 left-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-                </div>
-            </section>
+        <div className="min-h-screen">
+            <PageHeader
+                title="Let's Get You Rolling."
+                description="Ready to see the difference AXE Dispatch can make for your bottom line?"
+            />
 
             <section className="py-24">
                 <div className="container mx-auto px-4">
@@ -73,7 +65,7 @@ const ContactPage = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">Email Us</p>
-                                        <a href="mailto:axedispatchllc@gmail.com" className="text-2xl font-bold hover:text-primary transition-colors">axedispatchllc@gmail.com</a>
+                                        <a href="mailto:axedispatchllc@gmail.com" className="text-xl md:text-2xl font-bold hover:text-primary transition-colors">axedispatchllc@gmail.com</a>
                                     </div>
                                 </div>
 
@@ -83,7 +75,7 @@ const ContactPage = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-1">Business Office</p>
-                                        <p className="text-2xl font-bold italic">30 N Gould St Ste R Sheridan, WY 82801, USA</p>
+                                        <p className="text-xl md:text-2xl font-bold italic">30 N Gould St Ste R Sheridan, WY 82801, USA</p>
                                     </div>
                                 </div>
                             </div>

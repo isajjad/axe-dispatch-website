@@ -55,9 +55,9 @@ export default async function BlogPostPage({ params }: Props) {
     const readingTime = Math.ceil(JSON.stringify(post.body || []).split(' ').length / 200);
 
     return (
-        <div className="pt-24 min-h-screen">
+        <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-[60vh] min-h-[500px] flex items-end">
+            <section className="relative h-[50vh] min-h-[400px] flex items-end">
                 <div className="absolute inset-0">
                     {post.mainImage ? (
                         <Image

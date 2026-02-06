@@ -102,8 +102,8 @@ const Footer = () => {
                         © {new Date().getFullYear()} AXE Dispatch. All rights reserved.
                     </p>
                     <div className="flex gap-6 text-sm">
-                        <Link href="#" className="text-gray-500 hover:text-white">Privacy Policy</Link>
-                        <Link href="#" className="text-gray-500 hover:text-white">Terms of Service</Link>
+                        <Link href="/privacy-policy" className="text-gray-500 hover:text-white">Privacy Policy</Link>
+                        <Link href="/terms-of-service" className="text-gray-500 hover:text-white">Terms of Service</Link>
                     </div>
                 </div>
             </div>

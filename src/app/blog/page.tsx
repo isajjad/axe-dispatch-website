@@ -2,6 +2,7 @@ import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { getPosts, urlFor, Post } from "@/lib/sanity";
+import PageHeader from "@/components/PageHeader";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
@@ -19,25 +20,24 @@ export default async function BlogPage() {
     const hasPosts = posts && posts.length > 0;
 
     return (
-        <div className="pt-24 min-h-screen">
-            {/* Search Header */}
-            <section className="bg-secondary text-white py-20">
+        <div className="min-h-screen">
+            <PageHeader
+                title="The Carrier's Edge Blog"
+                description="Expert insights, market analysis, and tips for professional carriers."
+            />
+            {/* Search Bar */}
+            <div className="bg-secondary pb-12">
                 <div className="container mx-auto px-4">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-5xl font-bold mb-8">The Carrier&apos;s Edge Blog</h1>
-                        <p className="text-xl text-gray-400 mb-12">Expert insights, market analysis, and tips for professional carriers.</p>
-
-                        <div className="relative max-w-2xl mx-auto">
-                            <input
-                                type="text"
-                                placeholder="Search articles..."
-                                className="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-12 focus:bg-white focus:text-secondary outline-none transition-all placeholder:text-gray-500"
-                            />
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
-                        </div>
+                    <div className="max-w-2xl mx-auto relative">
+                        <input
+                            type="text"
+                            placeholder="Search articles..."
+                            className="w-full bg-white/10 border border-white/20 rounded-2xl py-4 px-12 focus:bg-white focus:text-secondary outline-none transition-all placeholder:text-gray-500 text-white"
+                        />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
                     </div>
                 </div>
-            </section>
+            </div>
 
             {/* Posts Section */}
             <section className="py-24">

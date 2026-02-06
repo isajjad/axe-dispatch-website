@@ -11,6 +11,7 @@ import {
     ArrowRight
 } from "lucide-react";
 import Link from "next/link";
+import PageHeader from "@/components/PageHeader";
 
 const serviceDetails = [
     {
@@ -59,20 +60,11 @@ const serviceDetails = [
 
 const ServicesPage = () => {
     return (
-        <div className="pt-24 min-h-screen">
-            <section className="bg-accent/30 py-20">
-                <div className="container mx-auto px-4 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                    >
-                        <h1 className="text-5xl md:text-6xl font-extrabold mb-6">Our Premium <span className="text-primary">Dispatch</span> Services</h1>
-                        <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-                            Professional, transparent, and results-driven logistics support for modern carriers.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+        <div className="min-h-screen">
+            <PageHeader
+                title="Our Premium Dispatch Services"
+                description="Professional, transparent, and results-driven logistics support for modern carriers."
+            />
 
             <section className="py-24">
                 <div className="container mx-auto px-4">
@@ -80,8 +72,8 @@ const ServicesPage = () => {
                         {serviceDetails.map((service, idx) => (
                             <motion.div
                                 key={idx}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
+                                initial={{ opacity: 0, x: -20, scale: 0.95 }}
+                                whileInView={{ opacity: 1, x: 0, scale: 1 }}
                                 transition={{ duration: 0.4, delay: idx * 0.1 }}
                                 viewport={{ once: true }}
                                 className="bg-white dark:bg-secondary/40 border border-gray-100 dark:border-gray-800 rounded-3xl p-8 hover:shadow-2xl transition-all h-full flex flex-col"
@@ -103,7 +95,7 @@ const ServicesPage = () => {
                                     href="/contact"
                                     className="flex items-center justify-between group font-bold text-primary"
                                 >
-                                    Learn More
+                                    Get Started
                                     <div className="bg-primary/10 p-2 rounded-lg group-hover:bg-primary group-hover:text-white transition-all">
                                         <ArrowRight size={20} />
                                     </div>

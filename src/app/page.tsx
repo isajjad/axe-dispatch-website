@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden pt-20">
+      <section className="relative min-h-[90vh] md:h-screen flex items-center overflow-hidden pt-20">
         <div className="absolute inset-0 z-0">
           <Image
             src="/hero-bg.png"
@@ -31,12 +31,12 @@ export default function Home() {
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="max-w-3xl"
           >
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
               Maximize Your Miles with <span className="text-primary">AXE Dispatch</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed">
@@ -83,8 +83,8 @@ export default function Home() {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="bg-white dark:bg-secondary/40 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:-translate-y-2 transition-all group"
@@ -129,7 +129,13 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:w-1/2">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true }}
+              className="lg:w-1/2"
+            >
               <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">Our Advantage</span>
               <h2 className="text-4xl md:text-5xl font-bold mb-8">Why Professional Carriers Choose <span className="text-primary">AXE</span></h2>
 
@@ -153,9 +159,8 @@ export default function Home() {
                     <div key={i} className="w-12 h-12 rounded-full border-4 border-white dark:border-secondary bg-gray-200" />
                   ))}
                 </div>
-                <p className="text-gray-500 font-medium italic">Join 200+ active carriers finding success with us.</p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -177,8 +182,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
 

@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import PageHeader from "@/components/PageHeader";
 import { Users, Target, Shield, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
 const stats = [
     { label: "Active Carriers", value: "250+" },
@@ -13,23 +14,11 @@ const stats = [
 
 const AboutPage = () => {
     return (
-        <div className="pt-24">
-            {/* Header Section */}
-            <section className="bg-secondary text-white py-20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 -skew-x-12 transform translate-x-1/2" />
-                <div className="container mx-auto px-4 relative z-10">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="max-w-3xl"
-                    >
-                        <h1 className="text-5xl md:text-6xl font-bold mb-6">Empowering Carriers, One Load at a Time</h1>
-                        <p className="text-xl text-gray-400">
-                            AXE Dispatch was founded with a single mission: to provide owner-operators and small fleets with the professional logistical support they need to compete with industry giants.
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+        <div className="flex flex-col">
+            <PageHeader
+                title="Empowering Carriers, One Load at a Time"
+                description="AXE Dispatch was founded with a single mission: to provide owner-operators and small fleets with the professional logistical support they need to compete with industry giants."
+            />
 
             {/* Stats Section */}
             <section className="py-12 bg-white -mt-10 relative z-20">
@@ -49,7 +38,13 @@ const AboutPage = () => {
             <section className="py-24">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                        <div className="space-y-8">
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6 }}
+                            viewport={{ once: true }}
+                            className="space-y-8"
+                        >
                             <div>
                                 <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">Our Story</span>
                                 <h2 className="text-4xl font-bold mb-6 italic">Built by Truckers, for Truckers.</h2>
@@ -75,7 +70,7 @@ const AboutPage = () => {
                                     <p className="text-sm text-gray-500">Integrity, transparency, and relentlessly pursuing the best rates for our clients.</p>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
 
                         <div className="relative">
                             <div className="rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -125,8 +120,8 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </section >
+        </div >
     );
 };
 

@@ -22,7 +22,7 @@ const Navbar = () => {
   const isHomePage = pathname === "/";
 
   useEffect(() => {
-    // Trigger entrance animation
+    // Trigger entrance animation with a slight delay for better feel
     setTimeout(() => setVisible(true), 100);
 
     const handleScroll = () => {
@@ -32,26 +32,26 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // On non-home pages, always use "scrolled" style for visibility
-  const showSolidHeader = scrolled || !isHomePage;
+  // Use scroll state for styling transitions locally
+  const showSolidHeader = scrolled;
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out
-        ${visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}
+        ${visible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"}
       `}
     >
-      {/* Floating Container */}
+      {/* Floating Container - Stay centered and floating on all pages */}
       <div className={`mx-auto transition-all duration-500 ease-out
-        ${scrolled ? "max-w-full px-0 pt-0" : "max-w-7xl px-4 pt-4"}
+        ${scrolled ? "max-w-6xl px-4 pt-2" : "max-w-7xl px-4 pt-4"}
       `}>
         <nav
           className={`relative transition-all duration-500 ease-out
             ${scrolled
-              ? "rounded-none bg-white/80 dark:bg-secondary/80 shadow-2xl shadow-black/10"
-              : "rounded-2xl bg-white/10 dark:bg-white/5 shadow-xl shadow-black/5"
+              ? "rounded-3xl bg-white/95 shadow-2xl shadow-black/10"
+              : "rounded-3xl bg-white/40 shadow-xl shadow-black/5"
             }
-            backdrop-blur-xl border border-white/20 dark:border-white/10
+            backdrop-blur-xl border border-white/50
           `}
         >
           <div className="px-6 lg:px-8">
@@ -65,8 +65,8 @@ const Navbar = () => {
                   ${scrolled ? "scale-90" : "scale-100"}
                 `}
               >
-                <div className={`transition-all duration-500 rounded-xl overflow-hidden
-                  ${!showSolidHeader ? "bg-white/90 px-3 py-1.5 shadow-lg" : ""}
+                <div className={`transition-all duration-500 rounded-2xl overflow-hidden
+                  ${!showSolidHeader ? "bg-white px-3 py-1.5 shadow-xl" : ""}
                 `}>
                   <Image
                     src="/logo.png"
@@ -85,15 +85,15 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative px-4 py-2 font-medium rounded-lg transition-all duration-300 group
+                    className={`relative px-4 py-2 font-bold rounded-lg transition-all duration-300 group
                       ${showSolidHeader
-                        ? "text-secondary dark:text-white hover:text-primary"
-                        : "text-white hover:text-primary"
+                        ? "text-secondary hover:text-primary"
+                        : "text-white hover:text-primary drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]"
                       }
                     `}
                     style={{
                       animationDelay: `${index * 100}ms`,
-                      animation: visible ? `fadeSlideDown 0.5s ease-out ${index * 0.1}s both` : 'none'
+                      animation: visible ? `fadeSlideRight 0.5s ease-out ${index * 0.1}s both` : 'none'
                     }}
                   >
                     <span className="relative z-10">{link.name}</span>
@@ -128,7 +128,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className={`md:hidden p-2.5 rounded-xl transition-all duration-300 
                   ${showSolidHeader
-                    ? "text-secondary dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+                    ? "text-secondary hover:bg-gray-100"
                     : "text-white bg-white/20 hover:bg-white/30"
                   }
                   hover:scale-110 active:scale-95
@@ -160,8 +160,8 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-3 text-lg font-medium text-secondary dark:text-white 
-                    hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800/50 
+                  className="block px-4 py-3 text-lg font-medium text-secondary 
+                    hover:text-primary hover:bg-gray-50 
                     rounded-xl transition-all duration-300"
                   style={{
                     transform: isOpen ? 'translateX(0)' : 'translateX(-20px)',
@@ -197,7 +197,7 @@ const Navbar = () => {
           </div>
         </nav>
       </div>
-    </header>
+    </header >
   );
 };
 
