@@ -15,10 +15,13 @@ export async function sendContactEmail(formData: FormData) {
         return { success: false, error: "Missing required fields" };
     }
 
+    console.log("Attempting to send email to info@axedispatch.com...");
+    console.log("Form data:", { name, email, phone, truckType });
+
     try {
-        const data = await resend.emails.send({
-            from: "AXE Dispatch <onboarding@resend.dev>", // Can be changed once domain is verified
-            to: ["axedispatchllc@gmail.com"],
+        const { data, error } = await resend.emails.send({
+            from: "AXE Dispatch <onboarding@resend.dev>",
+            to: ["info@axedispatch.com"],
             subject: `New Lead: ${name} - ${truckType}`,
             html: `
         <h2>New Lead from Website</h2>
@@ -31,8 +34,15 @@ export async function sendContactEmail(formData: FormData) {
       `,
         });
 
+        if (error) {
+            console.error("Resend API Error:", error);
+            return { success: false, error: error.message };
+        }
+
+        console.log("Email sent successfully:", data);
         return { success: true, data };
-    } catch (error) {
-        return { success: false, error: "Failed to send email" };
+    } catch (e: any) {
+        console.error("Unexpected error in sendContactEmail:", e);
+        return { success: false, error: e.message || "Failed to send email" };
     }
 }

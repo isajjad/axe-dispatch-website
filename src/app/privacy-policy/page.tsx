@@ -53,7 +53,7 @@ const PrivacyPolicy = () => {
                         </p>
                         <div className="mt-4 p-6 bg-accent/50 dark:bg-gray-900 rounded-2xl">
                             <p className="font-bold">AXE Dispatch LLC</p>
-                            <p>Email: axedispatchllc@gmail.com</p>
+                            <p>Email: info@axedispatch.com</p>
                             <p>Address: 30 N Gould St Ste R Sheridan, WY 82801, USA</p>
                         </div>
                     </section>
