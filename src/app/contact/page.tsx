@@ -113,9 +113,8 @@ const ContactPage = () => {
                                             />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="phone-number">Phone Number</label>
+                                            <label className="text-sm font-bold text-gray-500 ml-2" htmlFor="phone-number">Phone Number (Optional)</label>
                                             <input
-                                                required
                                                 name="phone"
                                                 id="phone-number"
                                                 type="tel"

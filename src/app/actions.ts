@@ -24,7 +24,7 @@ export async function sendContactEmail(formData: FormData) {
         <h2>New Lead from Website</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Phone:</strong> ${phone || "Not Provided"}</p>
         <p><strong>Truck Type:</strong> ${truckType}</p>
         <p><strong>Message:</strong></p>
         <p>${message}</p>
