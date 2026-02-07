@@ -11,6 +11,11 @@ export async function sendContactEmail(formData: FormData) {
     const truckType = formData.get("truckType") as string;
     const message = formData.get("message") as string;
 
+    if (!process.env.RESEND_API_KEY) {
+        console.error("RESEND_API_KEY is not defined in environment variables");
+        return { success: false, error: "Email service not configured (API Key missing)" };
+    }
+
     if (!name || !email || !message) {
         return { success: false, error: "Missing required fields" };
     }

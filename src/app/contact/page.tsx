@@ -17,10 +17,12 @@ import PageHeader from "@/components/PageHeader";
 
 const ContactPage = () => {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState<string>("");
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus("loading");
+        setErrorMessage("");
 
         try {
             const formData = new FormData(e.currentTarget);
@@ -31,10 +33,12 @@ const ContactPage = () => {
                 (e.target as HTMLFormElement).reset();
             } else {
                 console.error("Submission failed:", result.error);
+                setErrorMessage(result.error || "Failed to send message. Please try again.");
                 setStatus("error");
             }
-        } catch (err) {
+        } catch (err: any) {
             console.error("Unexpected error during submission:", err);
+            setErrorMessage(err.message || "An unexpected error occurred. Please try again.");
             setStatus("error");
         }
     };
@@ -188,7 +192,7 @@ const ContactPage = () => {
                                     </button>
 
                                     {status === "error" && (
-                                        <p className="text-red-500 text-center font-bold">Failed to send message. Please try again.</p>
+                                        <p className="text-red-500 text-center font-bold">{errorMessage}</p>
                                     )}
                                 </form>
                             </div>
