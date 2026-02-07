@@ -57,7 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-[50vh] min-h-[400px] flex items-end">
+            <section className="relative h-[60vh] min-h-[500px] flex items-end">
                 <div className="absolute inset-0">
                     {post.mainImage ? (
                         <Image
@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                 </div>
 
-                <div className="container mx-auto px-4 relative z-10 pb-16">
+                <div className="container mx-auto px-4 relative z-10 pt-32 pb-16">
                     <Link
                         href="/blog"
                         className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors"
