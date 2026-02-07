@@ -22,13 +22,19 @@ const ContactPage = () => {
         e.preventDefault();
         setStatus("loading");
 
-        const formData = new FormData(e.currentTarget);
-        const result = await sendContactEmail(formData);
+        try {
+            const formData = new FormData(e.currentTarget);
+            const result = await sendContactEmail(formData);
 
-        if (result.success) {
-            setStatus("success");
-            (e.target as HTMLFormElement).reset();
-        } else {
+            if (result.success) {
+                setStatus("success");
+                (e.target as HTMLFormElement).reset();
+            } else {
+                console.error("Submission failed:", result.error);
+                setStatus("error");
+            }
+        } catch (err) {
+            console.error("Unexpected error during submission:", err);
             setStatus("error");
         }
     };
